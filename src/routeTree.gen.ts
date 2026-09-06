@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CuuTroRouteImport } from './routes/cuu-tro'
 import { Route as DieuPhoiRouteImport } from './routes/dieu-phoi'
 import { Route as DoiCuuHoRouteImport } from './routes/doi-cuu-ho'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CuuTroRoute = CuuTroRouteImport.update({
+  id: '/cuu-tro',
+  path: '/cuu-tro',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DieuPhoiRoute = DieuPhoiRouteImport.update({
@@ -31,30 +37,34 @@ const DoiCuuHoRoute = DoiCuuHoRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cuu-tro': typeof CuuTroRoute
   '/dieu-phoi': typeof DieuPhoiRoute
   '/doi-cuu-ho': typeof DoiCuuHoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cuu-tro': typeof CuuTroRoute
   '/dieu-phoi': typeof DieuPhoiRoute
   '/doi-cuu-ho': typeof DoiCuuHoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cuu-tro': typeof CuuTroRoute
   '/dieu-phoi': typeof DieuPhoiRoute
   '/doi-cuu-ho': typeof DoiCuuHoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dieu-phoi' | '/doi-cuu-ho'
+  fullPaths: '/' | '/cuu-tro' | '/dieu-phoi' | '/doi-cuu-ho'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dieu-phoi' | '/doi-cuu-ho'
-  id: '__root__' | '/' | '/dieu-phoi' | '/doi-cuu-ho'
+  to: '/' | '/cuu-tro' | '/dieu-phoi' | '/doi-cuu-ho'
+  id: '__root__' | '/' | '/cuu-tro' | '/dieu-phoi' | '/doi-cuu-ho'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CuuTroRoute: typeof CuuTroRoute
   DieuPhoiRoute: typeof DieuPhoiRoute
   DoiCuuHoRoute: typeof DoiCuuHoRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cuu-tro': {
+      id: '/cuu-tro'
+      path: '/cuu-tro'
+      fullPath: '/cuu-tro'
+      preLoaderRoute: typeof CuuTroRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dieu-phoi': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CuuTroRoute: CuuTroRoute,
   DieuPhoiRoute: DieuPhoiRoute,
   DoiCuuHoRoute: DoiCuuHoRoute,
 }
