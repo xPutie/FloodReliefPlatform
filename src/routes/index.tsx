@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { SmsFallback } from "@/components/SmsFallback";
 import { t } from "@/lib/i18n";
 import { requests, statusKey, type RequestStatus } from "@/lib/mock-data";
 
