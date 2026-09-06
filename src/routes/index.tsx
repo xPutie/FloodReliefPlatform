@@ -36,7 +36,7 @@ function CitizenPage() {
   const toggle = (key: string) =>
     setGroups((g) => (g.includes(key) ? g.filter((x) => x !== key) : [...g, key]));
 
-  const tracked = requests[4];
+  const tracked = requests[4]!;
 
   return (
     <main className="mx-auto w-full max-w-md px-4 py-6 sm:max-w-lg">
