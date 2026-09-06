@@ -29,7 +29,9 @@ function CitizenPage() {
   const [people, setPeople] = useState(3);
   const [groups, setGroups] = useState<string[]>(["children"]);
   const [sent, setSent] = useState(false);
+  const [showSms, setShowSms] = useState(false);
   const current = 4; // Đang cứu hộ
+
 
   const toggle = (key: string) =>
     setGroups((g) => (g.includes(key) ? g.filter((x) => x !== key) : [...g, key]));
