@@ -189,6 +189,8 @@ function CitizenPage() {
           <p className="text-xs text-muted-foreground">4 {t("common.members")} · Dự kiến đến trong 12 phút</p>
         </div>
       </section>
+
+      <SmsFallback open={showSms} onClose={() => setShowSms(false)} />
     </main>
   );
 }
