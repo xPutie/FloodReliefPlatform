@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DieuPhoiRouteImport } from './routes/dieu-phoi'
+import { Route as DoiCuuHoRouteImport } from './routes/doi-cuu-ho'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const DieuPhoiRoute = DieuPhoiRouteImport.update({
   path: '/dieu-phoi',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DoiCuuHoRoute = DoiCuuHoRouteImport.update({
+  id: '/doi-cuu-ho',
+  path: '/doi-cuu-ho',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dieu-phoi': typeof DieuPhoiRoute
+  '/doi-cuu-ho': typeof DoiCuuHoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dieu-phoi': typeof DieuPhoiRoute
+  '/doi-cuu-ho': typeof DoiCuuHoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dieu-phoi': typeof DieuPhoiRoute
+  '/doi-cuu-ho': typeof DoiCuuHoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dieu-phoi'
+  fullPaths: '/' | '/dieu-phoi' | '/doi-cuu-ho'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dieu-phoi'
-  id: '__root__' | '/' | '/dieu-phoi'
+  to: '/' | '/dieu-phoi' | '/doi-cuu-ho'
+  id: '__root__' | '/' | '/dieu-phoi' | '/doi-cuu-ho'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DieuPhoiRoute: typeof DieuPhoiRoute
+  DoiCuuHoRoute: typeof DoiCuuHoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DieuPhoiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/doi-cuu-ho': {
+      id: '/doi-cuu-ho'
+      path: '/doi-cuu-ho'
+      fullPath: '/doi-cuu-ho'
+      preLoaderRoute: typeof DoiCuuHoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DieuPhoiRoute: DieuPhoiRoute,
+  DoiCuuHoRoute: DoiCuuHoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
