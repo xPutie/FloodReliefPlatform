@@ -56,6 +56,15 @@ function CitizenPage() {
       </button>
       <p className="mt-3 text-center text-xs text-muted-foreground">{t("citizen.ctaHint")}</p>
 
+      <button
+        type="button"
+        onClick={() => setShowSms(true)}
+        className="mt-3 w-full rounded-xl border border-cyan/40 bg-cyan/10 py-2.5 text-center text-sm font-semibold text-cyan"
+      >
+        {t("citizen.smsAction")}
+      </button>
+
+
       <div className="mt-5 space-y-3">
         <div className="glass flex items-center gap-3 rounded-2xl px-4 py-3">
           <span className="size-2.5 shrink-0 animate-pulse rounded-full bg-mint" />
