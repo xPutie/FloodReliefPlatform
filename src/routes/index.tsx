@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
+import { SmsFallback } from "@/components/SmsFallback";
 import { t } from "@/lib/i18n";
 import { requests, statusKey, type RequestStatus } from "@/lib/mock-data";
 
@@ -28,12 +29,14 @@ function CitizenPage() {
   const [people, setPeople] = useState(3);
   const [groups, setGroups] = useState<string[]>(["children"]);
   const [sent, setSent] = useState(false);
+  const [showSms, setShowSms] = useState(false);
   const current = 4; // Đang cứu hộ
+
 
   const toggle = (key: string) =>
     setGroups((g) => (g.includes(key) ? g.filter((x) => x !== key) : [...g, key]));
 
-  const tracked = requests[4];
+  const tracked = requests[4]!;
 
   return (
     <main className="mx-auto w-full max-w-md px-4 py-6 sm:max-w-lg">
@@ -52,6 +55,15 @@ function CitizenPage() {
         {sent ? t("citizen.submitted") : t("citizen.cta")}
       </button>
       <p className="mt-3 text-center text-xs text-muted-foreground">{t("citizen.ctaHint")}</p>
+
+      <button
+        type="button"
+        onClick={() => setShowSms(true)}
+        className="mt-3 w-full rounded-xl border border-cyan/40 bg-cyan/10 py-2.5 text-center text-sm font-semibold text-cyan"
+      >
+        {t("citizen.smsAction")}
+      </button>
+
 
       <div className="mt-5 space-y-3">
         <div className="glass flex items-center gap-3 rounded-2xl px-4 py-3">
@@ -177,6 +189,8 @@ function CitizenPage() {
           <p className="text-xs text-muted-foreground">4 {t("common.members")} · Dự kiến đến trong 12 phút</p>
         </div>
       </section>
+
+      <SmsFallback open={showSms} onClose={() => setShowSms(false)} />
     </main>
   );
 }

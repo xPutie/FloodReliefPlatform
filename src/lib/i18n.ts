@@ -55,7 +55,17 @@ const vi = {
 
   "citizen.title": "Yêu cầu cứu hộ khẩn cấp",
   "citizen.cta": "🚨 YÊU CẦU CỨU HỘ",
-  "citizen.ctaHint": "Nhấn để gửi vị trí và gọi đội cứu hộ gần nhất",
+  "citizen.ctaHint": "Nhấn để gửi yêu cầu cứu hộ",
+  "citizen.smsAction": "Không có Internet? Gửi yêu cầu qua SMS →",
+  "citizen.sms.title": "Gửi yêu cầu cứu hộ qua SMS",
+  "citizen.sms.intro":
+    "Khi bạn có sóng di động nhưng không có Internet, hãy gửi tin nhắn SMS theo đúng định dạng để đội cứu hộ nhận được yêu cầu.",
+  "citizen.sms.number": "Số SMS khẩn cấp",
+  "citizen.sms.format": "Định dạng tin nhắn",
+  "citizen.sms.formatExample": "CUUHO|<số người>|<trẻ em|cao tuổi|bị thương>|<địa chỉ>",
+  "citizen.sms.formatHint": "Ví dụ: CUUHO|4|tre em|Phường Hòa Cường Nam, Hải Châu, Đà Nẵng",
+  "citizen.sms.openApp": "MỞ ỨNG DỤNG SMS",
+  "citizen.sms.close": "Đóng",
   "citizen.shareLocation": "Chia sẻ vị trí hiện tại",
   "citizen.locating": "Đang xác định vị trí…",
   "citizen.peopleCount": "Số người cần hỗ trợ",
@@ -72,6 +82,7 @@ const vi = {
   "citizen.tracking": "Theo dõi trạng thái cứu hộ",
   "citizen.assignedTeam": "Đội cứu hộ được phân công",
   "citizen.hotline": "Tổng đài khẩn cấp 112",
+
 
   "coordinator.title": "Phòng kiểm soát khẩn cấp",
   "coordinator.region": "Khu vực miền Trung",
