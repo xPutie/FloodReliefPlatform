@@ -1,6 +1,9 @@
 {
   "name": "tanstack_start_ts",
   "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
   "sideEffects": false,
   "type": "module",
   "scripts": {
@@ -16,6 +19,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@prisma/client": "^5.22.0",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.8",
@@ -51,6 +55,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.4.2",
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.4.2",
     "lucide-react": "^0.575.0",
@@ -83,6 +88,7 @@
     "globals": "^15.15.0",
     "nitro": "3.0.260603-beta",
     "prettier": "^3.7.3",
+    "prisma": "^5.22.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.56.1",
     "vite": "8.1.5"
