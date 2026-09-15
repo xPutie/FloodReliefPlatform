@@ -6,19 +6,21 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
   private readonly logger = new Logger(PrismaService.name);
 
   async onModuleInit() {
-    await this.$connect();
-    // Verify connection with a lightweight query
     try {
+      await this.$connect();
       await this.$queryRaw`SELECT 1`;
       this.logger.log('Successfully connected to MySQL database via Prisma.');
     } catch (error) {
-      this.logger.error('Failed to connect to MySQL database:', error);
-      throw error;
+      this.logger.warn('MySQL database connection unavailable on startup. Service will operate in offline/degraded mode.');
     }
   }
 
   async onModuleDestroy() {
-    await this.$disconnect();
-    this.logger.log('Disconnected from MySQL database.');
+    try {
+      await this.$disconnect();
+      this.logger.log('Disconnected from MySQL database.');
+    } catch (error) {
+      // Ignore disconnect errors on shutdown
+    }
   }
 }

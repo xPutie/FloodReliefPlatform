@@ -1,78 +1,202 @@
-import { Link } from "@tanstack/react-router";
-import type { ReactNode } from "react";
+import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
+import { useState, type ReactNode } from "react";
 import { t } from "@/lib/i18n";
+import { Footer } from "./Footer";
+import { AuthProvider, useAuth } from "@/auth/AuthContext";
+import { getWorkspaceRoleInfo } from "@/auth/route-access";
 
 const navItems = [
-  { to: "/", labelKey: "nav.citizen" },
-  { to: "/dieu-phoi", labelKey: "nav.coordinator" },
-  { to: "/doi-cuu-ho", labelKey: "nav.team" },
-  { to: "/cuu-tro", labelKey: "nav.relief" },
-  { to: "/quan-tri", labelKey: "nav.admin" },
+  { to: "/", labelKey: "nav.citizen", subtitle: "Yêu cầu & theo dõi", roles: ["CITIZEN", "PUBLIC"] },
+  { to: "/dieu-phoi", labelKey: "nav.coordinator", subtitle: "Xác minh & phân công", roles: ["COORDINATOR", "ADMIN"] },
+  { to: "/doi-cuu-ho", labelKey: "nav.team", subtitle: "Nhiệm vụ cứu hộ", roles: ["TEAM_MEMBER", "ADMIN"] },
+  { to: "/cuu-tro", labelKey: "nav.relief", subtitle: "Nhu cầu & nguồn lực", roles: ["RELIEF_STAFF", "ADMIN"] },
+  { to: "/quan-tri", labelKey: "nav.admin", subtitle: "Giám sát hệ thống", roles: ["ADMIN"] },
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
   return (
-    <div className="relative min-h-screen overflow-hidden bg-background font-sans text-foreground">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink2 via-ink to-black" />
-      <div className="absolute -top-24 right-1/4 -z-10 h-96 w-96 rounded-full bg-violet/20 blur-[110px]" />
-      <div className="absolute bottom-0 left-1/4 -z-10 h-80 w-80 rounded-full bg-cyan/10 blur-[110px]" />
+    <AuthProvider>
+      <AppShellContent>{children}</AppShellContent>
+    </AuthProvider>
+  );
+}
 
-      <header className="glass sticky top-0 z-20 border-x-0 border-t-0 backdrop-blur-sm">
-        <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-5">
-          <Link to="/" className="flex shrink-0 items-center gap-3">
-            <div className="glow-vio grid size-10 place-items-center rounded-xl bg-gradient-to-br from-violet to-cyan text-lg">
-              🌊
+function AppShellContent({ children }: { children: ReactNode }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const routerState = useRouterState();
+  const currentPath = routerState.location.pathname;
+  const navigate = useNavigate();
+
+  const { session, logout } = useAuth();
+  const currentWorkspace = getWorkspaceRoleInfo(currentPath);
+
+  const userRole = session.isAuthenticated ? session.user?.role : null;
+
+  // Filter navigation items based on current authenticated role or show default for public
+  const visibleNavItems = navItems.filter((item) => {
+    if (item.to === "/") return true;
+    if (!session.isAuthenticated) return true; // Show all for easy workspace navigation in demo
+    if (userRole === "ADMIN") return true;
+    return item.roles.includes(userRole as any);
+  });
+
+  const currentNavItem = navItems.find((item) =>
+    item.to === "/" ? currentPath === "/" : currentPath.startsWith(item.to)
+  );
+
+  const handleLogout = () => {
+    logout();
+    navigate({ to: "/login" });
+  };
+
+  return (
+    <div className="flex min-h-screen flex-col bg-slate-50 font-sans text-slate-900">
+      {/* Global Command Header */}
+      <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur-xl shadow-xs">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6 lg:px-8">
+          {/* LEFT: Logo & Brand */}
+          <Link to="/" className="flex items-center gap-3 shrink-0 group">
+            <div className="relative flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-700 via-indigo-700 to-slate-900 p-0.5 text-white shadow-md transition-transform group-hover:scale-105">
+              <img src="/favicon.png" alt="Cứu Hộ Lũ Logo" className="size-full rounded-[10px] object-cover" />
             </div>
             <div className="leading-tight">
-              <p className="font-display text-lg font-bold tracking-tight text-card-foreground">
+              <p className="font-display text-lg font-extrabold tracking-tight text-slate-900 group-hover:text-blue-700 transition-colors">
                 {t("app.name")}
               </p>
-              <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                {t("app.tagline")}
+              <p className="text-[9px] font-extrabold uppercase tracking-widest text-blue-600 flex items-center gap-1">
+                <span>TRUNG TÂM CHỈ HUY</span>
+                <span className="inline-block size-1 rounded-full bg-red-500 animate-pulse" />
               </p>
             </div>
           </Link>
 
-          <nav className="ml-2 hidden items-center gap-1 text-sm md:flex">
-            {navItems.map((item) => (
+          {/* CENTER: Desktop Navigation with Role Subtitles */}
+          <nav className="hidden items-center gap-1 lg:flex">
+            {visibleNavItems.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 activeOptions={{ exact: item.to === "/" }}
-                className="rounded-lg px-3.5 py-2 text-muted-foreground transition-colors hover:bg-white/5 hover:text-card-foreground"
-                activeProps={{ className: "bg-white/10 font-semibold text-card-foreground" }}
+                className="group rounded-xl px-3.5 py-1.5 text-left transition-all hover:bg-slate-100/80"
+                activeProps={{ className: "bg-blue-600/10 font-semibold text-blue-700 hover:bg-blue-600/15" }}
               >
-                {t(item.labelKey)}
+                <span className="block text-sm font-bold text-slate-800 group-hover:text-blue-700">
+                  {t(item.labelKey)}
+                </span>
+                <span className="block text-[10px] text-slate-500 font-medium">
+                  {item.subtitle}
+                </span>
               </Link>
             ))}
           </nav>
 
-          <div className="ml-auto flex items-center gap-3">
-            <div className="hidden items-center gap-2 rounded-full border border-coral/40 bg-coral/10 px-3 py-1.5 text-xs font-semibold text-coral sm:flex">
-              <span className="size-2 animate-pulse rounded-full bg-coral" />4 {t("header.emergencyCount")}
+          {/* RIGHT: User Profile & Authentication */}
+          <div className="flex items-center gap-3">
+            <div className="hidden items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50/80 px-3 py-1 text-xs font-bold text-emerald-800 sm:flex shadow-2xs">
+              <span className="size-2 rounded-full bg-emerald-500 animate-ping" />
+              <span>TRỰC TUYẾN 24/7</span>
             </div>
-            <div className="grid size-9 place-items-center rounded-full bg-gradient-to-br from-cyan to-violet text-sm font-bold text-primary-foreground">
-              TĐ
-            </div>
+
+            {session.isAuthenticated && session.user ? (
+              <div className="flex items-center gap-2 border-l border-slate-200 pl-3">
+                <div className="text-right leading-tight hidden sm:block">
+                  <p className="text-xs font-bold text-slate-900">{session.user.name}</p>
+                  <p className="text-[10px] font-bold text-blue-600 uppercase tracking-wider">
+                    {session.user.role}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  className="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-rose-700 hover:bg-rose-50 hover:border-rose-200 transition-all shadow-2xs"
+                  title="Đăng xuất khỏi hệ thống"
+                >
+                  Đăng xuất
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 px-4 py-1.5 text-xs font-bold text-white shadow-xs hover:from-blue-700 hover:to-indigo-700 transition-all active:scale-95"
+              >
+                Đăng nhập
+              </Link>
+            )}
+
+            {/* Mobile Menu Toggle Button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="flex size-9 items-center justify-center rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-100 lg:hidden font-bold"
+              aria-label="Toggle Navigation Menu"
+            >
+              {mobileMenuOpen ? "✕" : "☰"}
+            </button>
           </div>
         </div>
 
-        <nav className="flex gap-1 overflow-x-auto border-t border-border px-3 py-2 text-sm md:hidden">
-          {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              activeOptions={{ exact: item.to === "/" }}
-              className="shrink-0 rounded-lg px-3 py-1.5 text-muted-foreground"
-              activeProps={{ className: "bg-white/10 font-semibold text-card-foreground" }}
-            >
-              {t(item.labelKey)}
-            </Link>
-          ))}
-        </nav>
+        {/* BREADCRUMB / PAGE CONTEXT BAR FOR DASHBOARDS */}
+        {currentPath !== "/" && (
+          <div className="border-t border-slate-100 bg-slate-50/80 px-4 py-1.5 text-xs text-slate-500 sm:px-6 lg:px-8">
+            <div className="mx-auto flex max-w-7xl items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Link to="/" className="hover:text-blue-600 font-medium">
+                  Trung tâm chỉ huy
+                </Link>
+                <span>→</span>
+                <span className="font-bold text-slate-800">
+                  {currentNavItem ? t(currentNavItem.labelKey) : "Không xác định"}
+                </span>
+                {currentNavItem && (
+                  <span className="text-slate-400 font-normal">
+                    ({currentNavItem.subtitle})
+                  </span>
+                )}
+              </div>
+
+              {/* Internal Workspace Access Indicator */}
+              <span className="text-[11px] font-semibold text-slate-600 bg-slate-200/80 px-2 py-0.5 rounded">
+                Vai trò UI: {session.isAuthenticated ? session.user?.role : currentWorkspace.role}
+              </span>
+            </div>
+          </div>
+        )}
+
+        {/* Mobile Navigation Drawer */}
+        {mobileMenuOpen && (
+          <nav className="border-t border-slate-200 bg-white px-4 py-3 lg:hidden">
+            <div className="flex flex-col gap-1.5">
+              {navItems.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  onClick={() => setMobileMenuOpen(false)}
+                  activeOptions={{ exact: item.to === "/" }}
+                  className="rounded-xl px-3 py-2 text-left transition-colors hover:bg-slate-100"
+                  activeProps={{ className: "bg-blue-50 text-blue-700" }}
+                >
+                  <span className="block text-sm font-bold text-slate-900">
+                    {t(item.labelKey)}
+                  </span>
+                  <span className="block text-xs text-slate-500">
+                    {item.subtitle}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </nav>
+        )}
       </header>
 
-      {children}
+      {/* Main Page Content */}
+      <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6 lg:px-8">
+        {children}
+      </main>
+
+      {/* Global Footer */}
+      <Footer />
     </div>
   );
 }
+
+

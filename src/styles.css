@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Cứu Hộ Lũ — "Nocturne Command Glow" design system.
- * All colors are oklch semantic tokens. Never hardcode colors in components.
+ * Cứu Hộ Lũ — Emergency Command Center Design System
+ * Clean, high-contrast, trustworthy, modern light theme.
  */
 
 @theme inline {
@@ -17,7 +17,7 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
 
-  --font-sans: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Be Vietnam Pro", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Space Grotesk", "Be Vietnam Pro", sans-serif;
 
   --color-background: var(--background);
@@ -52,37 +52,38 @@
 }
 
 :root {
-  --radius: 1rem;
+  --radius: 0.75rem;
 
-  --ink: oklch(0.1 0.045 277);
-  --ink2: oklch(0.17 0.062 278);
-  --violet: oklch(0.606 0.25 292);
-  --glow: oklch(0.8 0.11 292);
-  --cyan: oklch(0.79 0.14 205);
-  --amber: oklch(0.83 0.16 84);
-  --coral: oklch(0.71 0.17 13);
-  --mint: oklch(0.77 0.15 163);
-  --faint: oklch(0.55 0.03 257);
+  /* Clean semantic slate/indigo palette */
+  --ink: #f8fafc;
+  --ink2: #f1f5f9;
+  --violet: #2563eb;
+  --glow: #1d4ed8;
+  --cyan: #0284c7;
+  --amber: #d97706;
+  --coral: #dc2626;
+  --mint: #16a34a;
+  --faint: #64748b;
 
-  --background: var(--ink);
-  --foreground: oklch(0.87 0.012 260);
-  --card: oklch(0.17 0.055 278);
-  --card-foreground: oklch(0.93 0.008 260);
-  --popover: oklch(0.17 0.055 278);
-  --popover-foreground: oklch(0.93 0.008 260);
-  --primary: var(--violet);
-  --primary-foreground: oklch(0.98 0.005 280);
-  --secondary: oklch(0.24 0.05 278);
-  --secondary-foreground: oklch(0.93 0.008 260);
-  --muted: oklch(0.22 0.04 278);
-  --muted-foreground: oklch(0.71 0.03 257);
-  --accent: var(--cyan);
-  --accent-foreground: oklch(0.15 0.05 240);
-  --destructive: var(--coral);
-  --destructive-foreground: oklch(0.98 0.005 280);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 12%);
-  --ring: var(--violet);
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --popover: #ffffff;
+  --popover-foreground: #0f172a;
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #e0f2fe;
+  --accent-foreground: #0369a1;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #e2e8f0;
+  --input: #cbd5e1;
+  --ring: #2563eb;
 }
 
 @layer base {
@@ -99,20 +100,15 @@
 }
 
 @utility glass {
-  background: linear-gradient(
-    160deg,
-    color-mix(in oklab, white 7%, transparent),
-    color-mix(in oklab, white 2%, transparent)
-  );
-  border: 1px solid color-mix(in oklab, white 10%, transparent);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
 }
 
 @utility glow-red {
-  box-shadow:
-    0 0 0 1px color-mix(in oklab, var(--coral) 40%, transparent),
-    0 0 55px -8px color-mix(in oklab, var(--coral) 75%, transparent);
+  box-shadow: 0 4px 6px -1px rgb(220 38 38 / 0.1), 0 2px 4px -2px rgb(220 38 38 / 0.1);
 }
 
 @utility glow-vio {
-  box-shadow: 0 0 60px -18px color-mix(in oklab, var(--violet) 85%, transparent);
+  box-shadow: 0 4px 6px -1px rgb(37 99 235 / 0.1), 0 2px 4px -2px rgb(37 99 235 / 0.1);
 }
