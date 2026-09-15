@@ -1,308 +1,224 @@
-# Cứu Hộ Việt
-
-Create a modern responsive web application UI prototype for:
-
-"Cứu Hộ Lũ — Flood Rescue & Relief"
-
-PRODUCT VISION
-
-Build a disaster response platform designed for Vietnam first,
-
-with the ability to scale internationally in the future.
-
-The primary use case is flood rescue and relief coordination,
-
-especially for flood-prone regions such as Central Vietnam.
-
-The default UI language must be Vietnamese.
-
-The system architecture and UI should be designed so English and
-
-other languages can be added later.
-
-IMPORTANT:
-
-- UI text must be Vietnamese by default.
-
-- Do NOT mix Vietnamese and English unnecessarily in the interface.
-
-- Use English only for technical/product concepts where appropriate.
-
-- Do NOT implement a real backend.
-
-- Use realistic mock data.
-
-- Focus on UI/UX and user flows.
-
-- Do NOT create database logic.
-
-TARGET USERS
-
-1. Người dân
-
-2. Đội cứu hộ
-
-3. Điều phối viên cứu hộ
-
-4. Quản lý cứu trợ
-
-5. Quản trị viên
-
-CITIZEN EXPERIENCE
-
-The citizen interface must be extremely simple because users may be
-
-in stressful emergency situations.
-
-Main actions:
-
-- Gửi yêu cầu cứu hộ
-
-- Chia sẻ vị trí hiện tại
-
-- Mô tả tình trạng
-
-- Cho biết số người cần hỗ trợ
-
-- Đánh dấu trẻ em / người cao tuổi / người bị thương
-
-- Tải ảnh hiện trường
-
-- Theo dõi trạng thái cứu hộ
-
-- Xem đội cứu hộ được phân công
-
-The main emergency action should be highly visible:
-
-"🚨 YÊU CẦU CỨU HỘ"
-
-Example emergency statuses:
-
-- Đang chờ xác minh
-
-- Đã xác minh
-
-- Đang tìm đội cứu hộ
-
-- Đã phân công
-
-- Đang cứu hộ
-
-- Đã hoàn tất
-
-- Đã hủy
-
-RESCUE COORDINATOR
-
-Create a command-center style dashboard.
-
-The coordinator should be able to quickly see:
-
-- Tổng số yêu cầu cứu hộ
-
-- Yêu cầu khẩn cấp
-
-- Yêu cầu chưa xử lý
-
-- Đội cứu hộ đang hoạt động
-
-- Đội cứu hộ sẵn sàng
-
-- Vị trí các yêu cầu trên bản đồ
-
-- Vị trí các đội cứu hộ
-
-- Trạng thái phương tiện
-
-Main workflow:
-
-Yêu cầu cứu hộ
-
-→ Xác minh
-
-→ Đánh giá mức độ ưu tiên
-
-→ Phân công đội cứu hộ
-
-→ Theo dõi
-
-→ Hoàn tất
-
-RESCUE TEAM
-
-The rescue team dashboard should focus on active assignments.
-
-Display:
-
-- Nhiệm vụ được giao
-
-- Mức độ ưu tiên
-
-- Vị trí cần cứu hộ
-
-- Số người cần hỗ trợ
-
-- Thông tin tình trạng
-
-- Phương tiện
-
-- Trạng thái nhiệm vụ
-
-Actions:
-
-- Nhận nhiệm vụ
-
-- Từ chối nhiệm vụ
-
-- Bắt đầu cứu hộ
-
-- Cập nhật trạng thái
-
-- Hoàn tất cứu hộ
-
-RELIEF MANAGER
-
-Create a dashboard for:
-
-- Kho cứu trợ
-
-- Nguồn hàng
-
-- Nước uống
-
-- Lương thực
-
-- Thuốc men
-
-- Chăn màn
-
-- Tiếp nhận quyên góp
-
-- Phân bổ cứu trợ
-
-- Theo dõi phân phối
-
-ADMIN
-
-Create administrative pages for:
-
-- Người dùng
-
-- Vai trò
-
-- Khu vực
-
-- Đội cứu hộ
-
-- Phương tiện
-
-- Cấu hình hệ thống
-
-- Báo cáo
-
-DESIGN DIRECTION
-
-The design should feel like a real Vietnamese disaster-response
-
-platform rather than a generic SaaS dashboard.
-
-Prioritize:
-
-- Simplicity
-
-- High readability
-
-- Fast recognition
-
-- Mobile responsiveness
-
-- Accessibility
-
-- Emergency visibility
-
-- Map-based coordination
-
-- Clear status indicators
-
-- Large touch-friendly buttons for citizens
-
-The citizen experience should be mobile-first.
-
-The coordinator and manager dashboards can be desktop-first.
-
-GEOGRAPHIC CONTEXT
-
-Use realistic Vietnamese mock locations such as:
-
-- Đà Nẵng
-
-- Huế
-
-- Quảng Trị
-
-- Quảng Bình
-
-- Quảng Nam
-
-Use Vietnamese address concepts such as:
-
-- Tỉnh / Thành phố
-
-- Quận / Huyện
-
-- Phường / Xã
-
-However, do NOT hard-code these geographic concepts into the
-
-core architecture because the platform should support international
-
-deployment later.
-
-INTERNATIONALIZATION
-
-Design the UI so that text can later be translated.
-
-Avoid hardcoding language-specific text directly into reusable
-
-components.
-
-Prepare conceptually for:
-
-Vietnamese:
-
-"Yêu cầu cứu hộ"
-
-English:
-
-"Request Rescue"
-
-Do not implement full internationalization yet.
-
-Only make the UI structure compatible with it.
-
-Create the main pages, navigation, dashboards and emergency request
-
-flow using realistic Vietnamese mock data.
-
-Do not implement backend, database, authentication or AI yet.
-
-This project was built with [Lovable](https://lovable.dev).
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/fa40f33a-7b95-42e2-9721-e9adfa770a0a).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
+# 🚨 Cứu Hộ Việt — Flood Rescue & Relief Platform
+
+> **Nền tảng tiếp nhận, xác minh, điều phối cứu hộ và quản lý cứu trợ lũ lụt khẩn cấp thời gian thực.**  
+> Được thiết kế tối ưu cho công tác cứu hộ thiên tai tại Việt Nam với trải nghiệm đơn giản cho người dân và trung tâm chỉ huy 24/7 hiện đại cho ban điều phối.
+
+---
+
+## 📌 Tổng Quan Dự Án (Product Overview)
+
+Trong các đợt mưa lũ lịch sử, việc kết nối thông tin giữa **người dân bị nạn** và **lực lượng cứu hộ** là yếu tố sống còn. **Cứu Hộ Việt** cung cấp một giải pháp công nghệ toàn diện giúp:
+- **Người dân**: Gửi vị trí GPS / địa chỉ ngập lụt khẩn cấp chỉ với vài thao tác đơn giản, không bị bối rối khi căng thẳng.
+- **Điều phối viên**: Giám sát bản đồ cứu hộ thời gian thực, xác minh yêu cầu, nhận gợi ý đội cứu hộ phù hợp nhất theo khoảng cách thực tế và điều động nhiệm vụ chính xác.
+- **Đội cứu hộ**: Nhận thông báo nhiệm vụ tác chiến, xem thông tin số lượng người nạn nhân (người già, trẻ em, người thương vong), dẫn đường và cập nhật trạng thái nhiệm vụ.
+- **Quản lý cứu trợ**: Quản lý kho lương thực, thuốc men, nhu yếu phẩm và điều phối phân bổ đến các vùng ngập sâu.
+- **Quản trị viên**: Theo dõi Operational Intelligence Dashboard, xem nhật ký thao tác (Audit Log) server-side toàn bộ hệ thống.
+
+---
+
+## 🚀 Tính Năng Nổi Bật (Key Features)
+
+### 🚨 1. Tiếp Nhận Cứu Hộ Khẩn Cấp (Citizen Experience)
+- **Tự động định vị GPS & Tìm kiếm Địa chỉ**: Sử dụng Leaflet & OpenStreetMap Nominatim Reverse Geocoding để xác định tọa độ và địa chỉ chi tiết.
+- **Phân loại Mức độ Nguy cấp**: Đánh dấu tình trạng ngập (nước dâng cao, trên mái nhà, thiếu lương thực), thông tin nhóm dễ bị tổn thương (trẻ em, người cao tuổi, phụ nữ mang thai, người bị thương).
+- **Theo dõi Tiến độ Realtime**: Người dân tra cứu mã yêu cầu hoặc xem tiến trình xử lý ngay trên giao diện web.
+
+### 🎯 2. Trung Tâm Điều Phối 24/7 (Coordinator Command Center)
+- **Bản Đồ Tác Chiến Tương Tác**: Hiển thị trực quan vị trí các điểm cứu hộ khẩn cấp và các đội cứu hộ đang sẵn sàng hoặc đang làm nhiệm vụ.
+- **Thuật Toán Đề Xuất Đội Cứu Hộ (Smart Dispatch Intelligence)**:
+  - Tính toán khoảng cách thực tế giữa vị trí nạn nhân và các đội cứu hộ bằng công thức Haversine.
+  - Xếp hạng thứ tự ưu tiên các đội cứu hộ khả thi nhất gần vị trí sự cố.
+- **Phòng Chống Phân Công Trùng Lặp (Concurrent Dispatch Protection)**: Khóa giao dịch Prisma ACID server-side phòng tránh 2 điều phối viên cùng giao 1 đội cứu hộ hoặc 1 yêu cầu bị nhận trùng.
+
+### 🛡️ 3. Quản Lý Nhiệm Vụ & Nhật Ký Thao Tác (Mission Lifecycle & Audit Trail)
+- **Vòng Đời Nhiệm Vụ Khép Kín**: `WAITING_VERIFICATION` → `PRIORITIZED` → `ASSIGNED` → `IN_PROGRESS` → `COMPLETED` / `FAILED`.
+- **Hệ Thống Audit Log Server-side**: Ghi lại 100% nhật ký hoạt động (Đăng nhập, Xác minh, Điều phối, Thay đổi trạng thái) bảo đảm tính minh bạch, không thể can thiệp từ client.
+- **Operational Intelligence Dashboard**: Báo cáo tình hình thực tế, thời gian phản hồi trung bình, tỷ lệ hoàn tất nhiệm vụ và hỗ trợ xuất dữ liệu ra file **CSV (Standard Excel format)**.
+
+---
+
+## 🛠️ Công Nghệ Sử Dụng (Tech Stack)
+
+### Frontend (Web Application)
+- **Framework**: React 19, Vite, TanStack Router (File-based routing)
+- **State & Data Fetching**: TanStack React Query v5
+- **Styling & UI**: Tailwind CSS v4, Radix UI Primitives, Lucide Icons, Sonner Toast
+- **Bản đồ (Maps)**: Leaflet, React-Leaflet, OpenStreetMap Nominatim Geocoding API
+
+### Backend (REST API Service)
+- **Framework**: NestJS (TypeScript), Express
+- **ORM & Database**: Prisma ORM, PostgreSQL (hoặc SQLite/MySQL tương thích)
+- **Bảo mật & Phân quyền**: Passport-JWT, BcryptJS, RBAC Guards (Role-Based Access Control)
+- **Architecture**: Monorepo managed with **npm workspaces** & **Turborepo**
+
+---
+
+## 📁 Cấu Trúc Dự Án (Repository Structure)
+
+```text
+c-u-h-vi-t/
+├── apps/
+│   └── api/                   # Backend NestJS REST API Service
+│       ├── prisma/            # Database Schema & Migrations (Prisma)
+│       └── src/
+│           ├── analytics/     # Analytics & Operational Intelligence Module
+│           ├── assignment/    # Assignment Lifecycle & Dispatch Module
+│           ├── audit/         # Server-side Audit Logging & CSV Export Module
+│           ├── auth/          # JWT Authentication & Guard Policies
+│           ├── rescue-request/# Rescue Request Operations & Verification
+│           └── rescue-team/   # Rescue Team Management & Status Updates
+├── public/                    # Static Assets (Favicon, Logos)
+├── src/                       # Frontend React Application
+│   ├── auth/                  # Auth Context & Token Management
+│   ├── components/            # Reusable UI Components & Leaflet Maps
+│   ├── lib/                   # Dispatch Logic, Haversine Distance & Geocoding
+│   ├── routes/                # TanStack File-based Routes
+│   │   ├── index.tsx          # Hero & Live Emergency Telemetry
+│   │   ├── cuu-tro.tsx        # Citizen Request Page
+│   │   ├── dieu-phoi.tsx      # Coordinator Command Dashboard
+│   │   ├── doi-cuu-ho.tsx     # Rescue Team Mission Page
+│   │   ├── quan-tri.tsx       # Admin Analytics & Audit Logs
+│   │   └── login.tsx          # Authentication Portal
+│   └── styles.css             # Tailwind & Global Styles
+├── setup.bat                  # Script cài đặt tự động toàn bộ dự án
+├── start-dev.bat              # Script khởi động đồng thời Backend & Frontend
+├── turbo.json                 # Turborepo Build Pipeline
+└── package.json               # Root Workspace Package Configuration
 ```
+
+---
+
+## ⚡ Hướng Dẫn Cài Đặt & Khởi Chạy (Quick Start Guide)
+
+### 📋 Yêu Cầu Tiền Đề (Prerequisites)
+- **Node.js**: v18.0.0 trở lên (Khuyên dùng v20 LTS)
+- **npm**: v10.0.0 trở lên
+- **PostgreSQL Database** (hoặc cấu hình SQLite trong `apps/api/prisma/schema.prisma`)
+
+---
+
+### 🚀 Cách 1: Khởi Chạy Tự Động (Dành cho Windows)
+
+Dự án đã tích hợp sẵn 2 script tự động hóa:
+
+1. **Cài đặt toàn bộ dependencies & khởi tạo Prisma**:
+   👉 Nhấp đúp chạy file `setup.bat` (hoặc chạy trong CMD):
+   ```cmd
+   .\setup.bat
+   ```
+
+2. **Khởi động đồng thời cả Backend API và Frontend Web**:
+   👉 Nhấp đúp chạy file `start-dev.bat` (hoặc chạy trong CMD):
+   ```cmd
+   .\start-dev.bat
+   ```
+   - **Backend API**: Running at `http://localhost:3000`
+   - **Frontend App**: Running at `http://localhost:5173` (hoặc cổng được cấp ngẫu nhiên)
+
+---
+
+### 🛠️ Cách 2: Cài Đặt Thủ Công (Manual Step-by-Step)
+
+#### Bước 1: Clone Repository
+```bash
+git clone https://github.com/xPutie/c-u-h-vi-t.git
+cd c-u-h-vi-t
+```
+
+#### Bước 2: Cài đặt Dependencies
+```bash
+# Cài đặt cho Root và các Workspaces
+npm install
+
+# Cài đặt cho Backend API
+cd apps/api
+npm install
+cd ../..
+```
+
+#### Bước 3: Cấu hình Biến Môi Trường (Environment Variables)
+Tạo file `.env` trong thư mục `apps/api/`:
+```env
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/flood_rescue?schema=public"
+JWT_SECRET="super-secret-jwt-key-flood-rescue-2026"
+PORT=3000
+```
+
+Tạo file `.env` tại thư mục gốc (Root):
+```env
+VITE_API_URL="http://localhost:3000"
+```
+
+#### Bước 4: Khởi tạo Database với Prisma
+```bash
+cd apps/api
+npx prisma db push
+npx prisma generate
+cd ../..
+```
+
+#### Bước 5: Khởi chạy ứng dụng
+
+- **Khởi chạy Backend NestJS**:
+  ```bash
+  cd apps/api
+  npm run start:dev
+  ```
+
+- **Khởi chạy Frontend React (Vite)** (mở cửa sổ terminal mới):
+  ```bash
+  npm run dev
+  ```
+
+---
+
+## 🔑 Tài Khoản Thử Nghiệm & Phân Quyền (RBAC Roles)
+
+Hệ thống hỗ trợ các vai trò đăng nhập với quyền hạn tương ứng:
+
+| Vai Trò | Quyền Hạn Trong Hệ Thống |
+| :--- | :--- |
+| **CITIZEN** | Gửi yêu cầu cứu hộ, theo dõi tiến độ công khai |
+| **COORDINATOR** | Phê duyệt yêu cầu, chạy thuật toán Dispatch đề xuất đội, phân công cứu hộ |
+| **RESCUE_TEAM** | Tiếp nhận nhiệm vụ, cập nhật vị trí & trạng thái tác chiến cứu hộ |
+| **RELIEF_MANAGER** | Quản lý kho vật tư, phân phối hàng cứu trợ |
+| **ADMIN** | Xem dashboard Operational Intelligence, theo dõi Audit Log toàn hệ thống, quản lý tài khoản |
+
+---
+
+## 📡 Danh Sách API Endpoints Chính (REST API Matrix)
+
+### Auth (`/auth`)
+- `POST /auth/register` — Đăng ký tài khoản mới
+- `POST /auth/login` — Đăng nhập & lấy JWT Token
+- `GET /auth/me` — Lấy thông tin tài khoản hiện tại
+
+### Yêu Cầu Cứu Hộ (`/rescue-request`)
+- `POST /rescue-request` — Tạo yêu cầu cứu hộ khẩn cấp (Công khai)
+- `GET /rescue-request` — Lấy danh sách yêu cầu (Có bộ lọc trạng thái/độ ưu tiên)
+- `PATCH /rescue-request/:id/verify` — (Coordinator/Admin) Xác minh yêu cầu
+- `PATCH /rescue-request/:id/prioritize` — (Coordinator/Admin) Đánh giá mức độ ưu tiên
+
+### Phân Công & Điều Phối (`/assignment`)
+- `POST /assignment` — (Coordinator/Admin) Phân công đội cứu hộ vào sự cố (Có khóa bảo vệ concurrency)
+- `PATCH /assignment/:id/status` — (RescueTeam/Coordinator) Cập nhật trạng thái nhiệm vụ (`ACCEPTED`, `IN_PROGRESS`, `COMPLETED`, `CANCELLED`)
+
+### Nhật Ký & Thống Kê (`/audit` & `/analytics`)
+- `GET /audit` — (Admin) Lấy nhật ký Audit Log phân trang & tìm kiếm
+- `GET /audit/export` — (Admin) Tải xuống tệp báo cáo Audit dạng CSV
+- `GET /analytics/operational` — (Admin/Coordinator) Lấy các chỉ số Operational Intelligence realtime
+
+---
+
+## 📄 Giấy Phép & Đóng Góp (License & Contribution)
+
+Dự án được phát triển vì cộng đồng, phục vụ cho công tác phòng chống thiên tai và cứu hộ cứu nạn tại Việt Nam.
+
+- **License**: MIT License
+- **Đóng góp**: Mọi ý kiến đóng góp, Issue hoặc Pull Request đều được hoan nghênh nhằm hoàn thiện hệ thống phục vụ bà con vùng lũ.
+
+---
+
+<p align="center">
+  <b>🚨 Cứu Hộ Việt — Cứu Hộ Nhanh Hơn. An Toàn Hơn. 🚨</b>
+</p>
