@@ -14,6 +14,7 @@ enum UserRole {
   CITIZEN
   COORDINATOR
   TEAM_MEMBER
+  RELIEF_STAFF
   ADMIN
 }
 
@@ -58,12 +59,13 @@ model User {
   id             String          @id @default(uuid()) @db.VarChar(36)
   name           String          @db.VarChar(255)
   phone          String          @db.VarChar(20)
-  email          String?         @db.VarChar(255)
+  email          String?         @unique @db.VarChar(255)
   password       String          @db.VarChar(255)
   role           UserRole
   createdAt      DateTime        @default(now()) @map("created_at")
   updatedAt      DateTime        @updatedAt @map("updated_at")
   rescueRequests RescueRequest[]
+  auditLogs      AuditLog[]
 
   @@map("users")
 }
@@ -91,15 +93,20 @@ model RescueRequest {
 }
 
 model RescueTeam {
-  id          String           @id @default(uuid()) @db.VarChar(36)
-  name        String           @db.VarChar(255)
-  status      RescueTeamStatus
-  capacity    Int
-  capability  String?          @db.VarChar(255)
-  createdAt   DateTime         @default(now()) @map("created_at")
-  updatedAt   DateTime         @updatedAt @map("updated_at")
-  assignments Assignment[]
+  id                String           @id @default(uuid()) @db.VarChar(36)
+  name              String           @db.VarChar(255)
+  status            RescueTeamStatus
+  capacity          Int
+  capability        String?          @db.VarChar(255)
+  currentLatitude   Decimal?         @map("current_latitude") @db.Decimal(10, 7)
+  currentLongitude  Decimal?         @map("current_longitude") @db.Decimal(10, 7)
+  locationAccuracy  Decimal?         @map("location_accuracy") @db.Decimal(8, 2)
+  locationUpdatedAt DateTime?        @map("location_updated_at")
+  createdAt         DateTime         @default(now()) @map("created_at")
+  updatedAt         DateTime         @updatedAt @map("updated_at")
+  assignments       Assignment[]
 
+  @@index([currentLatitude, currentLongitude], map: "idx_rescueteam_coords")
   @@map("rescue_teams")
 }
 
@@ -111,6 +118,9 @@ model Assignment {
   assignedAt      DateTime         @default(now()) @map("assigned_at")
   acceptedAt      DateTime?        @map("accepted_at")
   rejectedAt      DateTime?        @map("rejected_at")
+  startedAt       DateTime?        @map("started_at")
+  completedAt     DateTime?        @map("completed_at")
+  failedAt        DateTime?        @map("failed_at")
   createdAt       DateTime         @default(now()) @map("created_at")
   updatedAt       DateTime         @updatedAt @map("updated_at")
   rescueRequest   RescueRequest    @relation(fields: [rescueRequestId], references: [id])
@@ -121,3 +131,21 @@ model Assignment {
   @@index([status], map: "idx_assignment_status")
   @@map("assignments")
 }
+
+model AuditLog {
+  id          String   @id @default(uuid()) @db.VarChar(36)
+  userId      String?  @map("user_id") @db.VarChar(36)
+  action      String   @db.VarChar(100)
+  entityType  String   @map("entity_type") @db.VarChar(100)
+  entityId    String?  @map("entity_id") @db.VarChar(36)
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user        User?    @relation(fields: [userId], references: [id])
+
+  @@index([createdAt], map: "idx_audit_created_at")
+  @@index([userId], map: "idx_audit_user_id")
+  @@index([entityType, entityId], map: "idx_audit_entity")
+  @@map("audit_logs")
+}
+
