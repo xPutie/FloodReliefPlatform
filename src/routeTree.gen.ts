@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CuuTroRouteImport } from './routes/cuu-tro'
 import { Route as DieuPhoiRouteImport } from './routes/dieu-phoi'
 import { Route as DoiCuuHoRouteImport } from './routes/doi-cuu-ho'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as QuanTriRouteImport } from './routes/quan-tri'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const DoiCuuHoRoute = DoiCuuHoRouteImport.update({
   path: '/doi-cuu-ho',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const QuanTriRoute = QuanTriRouteImport.update({
   id: '/quan-tri',
   path: '/quan-tri',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/cuu-tro': typeof CuuTroRoute
   '/dieu-phoi': typeof DieuPhoiRoute
   '/doi-cuu-ho': typeof DoiCuuHoRoute
+  '/login': typeof LoginRoute
   '/quan-tri': typeof QuanTriRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/cuu-tro': typeof CuuTroRoute
   '/dieu-phoi': typeof DieuPhoiRoute
   '/doi-cuu-ho': typeof DoiCuuHoRoute
+  '/login': typeof LoginRoute
   '/quan-tri': typeof QuanTriRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,23 @@ export interface FileRoutesById {
   '/cuu-tro': typeof CuuTroRoute
   '/dieu-phoi': typeof DieuPhoiRoute
   '/doi-cuu-ho': typeof DoiCuuHoRoute
+  '/login': typeof LoginRoute
   '/quan-tri': typeof QuanTriRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cuu-tro' | '/dieu-phoi' | '/doi-cuu-ho' | '/quan-tri'
+  fullPaths:
+    '/' | '/cuu-tro' | '/dieu-phoi' | '/doi-cuu-ho' | '/login' | '/quan-tri'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cuu-tro' | '/dieu-phoi' | '/doi-cuu-ho' | '/quan-tri'
-  id: '__root__' | '/' | '/cuu-tro' | '/dieu-phoi' | '/doi-cuu-ho' | '/quan-tri'
+  to: '/' | '/cuu-tro' | '/dieu-phoi' | '/doi-cuu-ho' | '/login' | '/quan-tri'
+  id:
+    | '__root__'
+    | '/'
+    | '/cuu-tro'
+    | '/dieu-phoi'
+    | '/doi-cuu-ho'
+    | '/login'
+    | '/quan-tri'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +93,7 @@ export interface RootRouteChildren {
   CuuTroRoute: typeof CuuTroRoute
   DieuPhoiRoute: typeof DieuPhoiRoute
   DoiCuuHoRoute: typeof DoiCuuHoRoute
+  LoginRoute: typeof LoginRoute
   QuanTriRoute: typeof QuanTriRoute
 }
 
@@ -109,6 +127,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DoiCuuHoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/quan-tri': {
       id: '/quan-tri'
       path: '/quan-tri'
@@ -124,6 +149,7 @@ const rootRouteChildren: RootRouteChildren = {
   CuuTroRoute: CuuTroRoute,
   DieuPhoiRoute: DieuPhoiRoute,
   DoiCuuHoRoute: DoiCuuHoRoute,
+  LoginRoute: LoginRoute,
   QuanTriRoute: QuanTriRoute,
 }
 export const routeTree = rootRouteImport

@@ -1,12 +1,14 @@
+import type React from "react";
+
 type Tone = "default" | "coral" | "amber" | "cyan" | "mint" | "violet";
 
 const toneClass: Record<Tone, string> = {
-  default: "text-card-foreground",
-  coral: "text-coral",
-  amber: "text-amber",
-  cyan: "text-cyan",
-  mint: "text-mint",
-  violet: "text-glow",
+  default: "text-slate-900",
+  coral: "text-red-600",
+  amber: "text-amber-600",
+  cyan: "text-sky-600",
+  mint: "text-emerald-600",
+  violet: "text-blue-600",
 };
 
 export function StatCard({
@@ -21,10 +23,10 @@ export function StatCard({
   tone?: Tone;
 }) {
   return (
-    <div className="glass rounded-2xl p-4">
-      <p className="text-xs text-muted-foreground">{label}</p>
-      <p className={`mt-2 font-display text-4xl font-bold ${toneClass[tone]}`}>{value}</p>
-      {hint ? <p className="mt-1 text-[11px] text-faint">{hint}</p> : null}
+    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+      <p className="text-xs font-medium text-slate-500">{label}</p>
+      <p className={`mt-1 font-display text-3xl font-bold tracking-tight ${toneClass[tone]}`}>{value}</p>
+      {hint ? <p className="mt-1 text-xs text-slate-500">{hint}</p> : null}
     </div>
   );
 }
@@ -41,9 +43,9 @@ export function Panel({
   className?: string;
 }) {
   return (
-    <div className={`glass rounded-2xl p-4 ${className}`}>
+    <div className={`rounded-xl border border-slate-200 bg-white p-4 shadow-xs ${className}`}>
       <div className="flex items-center justify-between gap-3">
-        <p className="font-semibold text-card-foreground">{title}</p>
+        <p className="font-semibold text-slate-900">{title}</p>
         {action}
       </div>
       <div className="mt-4">{children}</div>
